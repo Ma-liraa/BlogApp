@@ -27,6 +27,7 @@ async function SinglePost({ params }) {
           src={post.coverImageUrl}
           alt={post.briefText}
         />
+        
         <div className="absolute right-4 top-4 rounded-full bg-[#C3CDFF]/70 px-3 py-1.5 text-sm font-[1000] text-[#1E2A44] backdrop-blur-sm">
           {post.category.title}
         </div>

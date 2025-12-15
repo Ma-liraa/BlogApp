@@ -8,8 +8,7 @@ function layout({ children }) {
   const [sideBarOpen, setSideBarOpen] = useState(false);
   return (
     <>
-      <div className=""></div>
-      <div className="contain flex h-screen overflow-y-auto  md:overflow-hidden">
+      <div className="contain flex h-screen overflow-y-auto p-4 md:overflow-hidden">
         <div
           className={`hidden transition-all md:block ${sideBarOpen ? "w-[250px]" : "w-[72px]"} `}
         >
