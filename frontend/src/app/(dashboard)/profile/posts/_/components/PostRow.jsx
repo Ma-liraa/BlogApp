@@ -7,7 +7,8 @@ import { DeletePost, UpdatePost } from "./Buttons";
 const typeStyle = {
   free: {
     label: "رایگان",
-    className: "badge--success",
+    className:
+      "rounded-md px-1.5 py-0.5 bg-teal-500/25 text-teal-800 inset-ring inset-ring-teal-600/25",
   },
   premium: {
     label: "پولی",
@@ -30,7 +31,7 @@ function PostRow({ index, post }) {
         </span>
       </td>
       <td>
-        <div className="flex items-center jus gap-x-3">
+        <div className="jus flex items-center gap-x-3">
           <UpdatePost id={post._id} />
           <DeletePost post={post} />
         </div>

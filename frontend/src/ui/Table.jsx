@@ -1,7 +1,7 @@
 function Table({ children }) {
   return (
-    <div className="mb-4 break-inside-avoid rounded-3xl bg-[#3B66FF]/10 p-2 shadow-[0_0_30px_rgba(59,102,255,0.5)] md:mb-0">
-      <div className="overflow-x-auto rounded-2xl bg-[#fcfcff]">
+    <div className="mb-4 break-inside-avoid rounded-3xl bg-white  p-2 md:mb-0">
+      <div className="overflow-x-auto">
         <table>{children}</table>
       </div>
     </div>

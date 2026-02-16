@@ -13,7 +13,7 @@ function RHFSelect({ label, name, register, options, isRequired }) {
       <select
         {...register(name)}
         id={name}
-        className="w-full rounded-xl bg-[#C3CDFF] p-4 text-xs font-[1000] text-[#1E2A44]"
+        className="w-full rounded-xl bg-[#E5F6FF] p-4 text-xs font-[1000] text-[#1E2A44]"
       >
         <option className="text-sm font-[1000] text-[#1E2A44]" value="#">
           همه

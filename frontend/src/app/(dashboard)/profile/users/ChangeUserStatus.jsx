@@ -1,8 +1,9 @@
+"use client"
 import { useForm } from "react-hook-form";
 import { useQueryClient } from "@tanstack/react-query";
-import RHFSelect from "../../../ui/RHFSelect";
-import Loading from "../../../ui/Loading";
 import useChangeUserStatus from "./useChangeUserStatus";
+import RHFSelect from "@/ui/RHFSelect";
+import Loading from "app/(blog)/blogs/loading";
 
 const options = [
   {

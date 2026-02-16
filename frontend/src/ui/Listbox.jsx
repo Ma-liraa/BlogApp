@@ -56,8 +56,8 @@ export default function ListBox({ categories }) {
                     d="M7 12.9L10.1429 16.5L18 7.5"
                     stroke="black"
                     strokeWidth="1.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   />
                 </svg>
               ) : null}
@@ -82,8 +82,8 @@ export default function ListBox({ categories }) {
                       d="M7 12.9L10.1429 16.5L18 7.5"
                       stroke="black"
                       strokeWidth="1.5"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                     />
                   </svg>
                 ) : null}

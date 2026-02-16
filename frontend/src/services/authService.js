@@ -3,7 +3,9 @@ const { default: http } = require("./httpService");
 export async function signupApi(data) {
   return http.post("/user/signup", data).then(({ data }) => data.data);
 }
-
+export async function updateProfile(data) {
+  return http.patch("/user/update", data).then(({ data }) => data.data);
+}
 export async function signinApi(data) {
   return http.post("/user/signin", data).then(({ data }) => data.data);
 }

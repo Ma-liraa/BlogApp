@@ -1,8 +1,6 @@
 "use client";
-import ButtonIcon from "@/ui/ButtonIcon";
 import ConfirmDelete from "@/ui/ConfirmDelete";
 import Modal from "@/ui/Modal";
-import { PencilIcon, PlusIcon, TrashIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { useState } from "react";
 import useDeletePost from "./useDeletePost";
@@ -12,10 +10,10 @@ export function CreatePost() {
   return (
     <div>
       <Link
-        className="mb-4 break-inside-avoid  justify-self-end rounded-3xl bg-[#3B66FF]/10 p-2 shadow-[0_0_30px_rgba(59,102,255,0.5)] md:mb-0"
+        className="mb-4 break-inside-avoid justify-self-end md:mb-0"
         href="/profile/posts/create"
       >
-        <div className="flex items-center gap-x-2  rounded-2xl bg-[#C3CDFF] px-6 py-4 text-base font-[1000] text-[#1E2A44] transition-colors hover:text-[#3B66FF]">
+        <div className="flex items-center gap-x-2 rounded-2xl bg-white px-6 py-4 text-base font-bold text-[#1E2A44] transition-colors hover:text-[#3B66FF]">
           <span className="hidden md:block">ایجاد پست</span>
           <svg
             className="h-8 w-8"
@@ -46,7 +44,7 @@ export function DeletePost({ post: { _id, title } }) {
     <>
       <button
         onClick={() => setOpen(true)}
-        className="text-rose-600 transition-all hover:text-rose-700"
+        className="flex items-center justify-center rounded-md bg-rose-400/20 px-4 py-2 text-rose-600 transition-all hover:text-rose-700"
       >
         <svg
           width="24"
@@ -90,10 +88,10 @@ export function DeletePost({ post: { _id, title } }) {
 export function UpdatePost({ id }) {
   return (
     <Link href={`/profile/posts/${id}/edit`}>
-      <button className="flex items-center justify-center text-[#1E2A44] transition-all hover:text-[#3B66FF]">
+      <button className="flex items-center justify-center rounded-md bg-[#2251D1]/20 px-4 py-2 text-[#2251D1] transition-all hover:text-[#3B66FF]">
         <svg
-          width="24"
-          height="24"
+          width="20"
+          height="20"
           viewBox="0 0 24 24"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"

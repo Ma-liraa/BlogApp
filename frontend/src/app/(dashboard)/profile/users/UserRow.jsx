@@ -1,8 +1,7 @@
 import { useState } from "react";
-import Modal from "../../../ui/Modal";
-import Table from "../../../ui/Table";
 import ChangeUserStatus from "./ChangeUserStatus";
-import { toPersianNumbers } from "../../../utils/toPersianNumbers";
+import Modal from "@/ui/Modal";
+import { toPersianDigits } from "@/utils/numberFormatter";
 
 const statusStyle = [
   {
@@ -28,7 +27,7 @@ function UserRow({ user, index }) {
       <td>{index + 1}</td>
       <td>{user.name || "بدون نام"}</td>
       <td>{user.email || "بدون ایمیل"}</td>
-      <td>{toPersianNumbers(user.phoneNumber)}</td>
+      <td>{toPersianDigits(user.phoneNumber)}</td>
       <td>{user.role}</td>
       <td>
         <span className={`badge ${statusStyle[status].className}`}>

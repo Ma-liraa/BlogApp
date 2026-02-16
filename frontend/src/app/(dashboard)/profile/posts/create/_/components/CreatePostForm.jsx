@@ -114,10 +114,10 @@ function CreatePostForm({ postToEdit = {} }) {
 
   return (
     <form
-      className="mb-4 w-full break-inside-avoid rounded-3xl bg-[#3B66FF]/10 p-2 shadow-[0_0_30px_rgba(59,102,255,0.5)] md:mb-0"
+      className="mb-4 w-full break-inside-avoid md:mb-0"
       onSubmit={handleSubmit(onsubmit)}
     >
-      <div className="flex flex-col items-center gap-y-6 rounded-2xl bg-[#FCFCFF] p-4">
+      <div className="grid grid-cols-1 gap-6 rounded-2xl bg-[#FCFCFF] p-4 md:grid-cols-2">
         <RHFTextField
           name="title"
           label="عنوان"
@@ -164,32 +164,34 @@ function CreatePostForm({ postToEdit = {} }) {
           />
         </div>
 
-        <Controller
-          name="coverImage"
-          control={control}
-          rules={{ required: "کاور پست الزامی است" }}
-          render={({ field: { value, onChange, ...rest } }) => {
-            return (
-              <FileInput
-                label="انتخاب کاور پست"
-                name="coverImage"
-                isRequired
-                errors={errors}
-                {...rest}
-                value={value?.fileName}
-                onChange={(event) => {
-                  const file = event.target.files[0];
-                  onChange(file);
-                  setCoverImageUrl(URL.createObjectURL(file));
-                  event.target.value = null;
-                }}
-              />
-            );
-          }}
-        />
+        <div className="col-span-2">
+          <Controller
+            name="coverImage"
+            control={control}
+            rules={{ required: "کاور پست الزامی است" }}
+            render={({ field: { value, onChange, ...rest } }) => {
+              return (
+                <FileInput
+                  label="انتخاب کاور پست"
+                  name="coverImage"
+                  isRequired
+                  errors={errors}
+                  {...rest}
+                  value={value?.fileName}
+                  onChange={(event) => {
+                    const file = event.target.files[0];
+                    onChange(file);
+                    setCoverImageUrl(URL.createObjectURL(file));
+                    event.target.value = null;
+                  }}
+                />
+              );
+            }}
+          />
+        </div>
 
         {coverImageUrl && (
-          <div className="relative aspect-video h-[200px] w-full overflow-hidden rounded-xl">
+          <div className="relative col-span-2 aspect-video h-[200px] w-full overflow-hidden rounded-xl">
             <Image
               fill
               alt="cover-iamge"
@@ -201,7 +203,7 @@ function CreatePostForm({ postToEdit = {} }) {
                 setCoverImageUrl(null);
                 setValue("coverImage", null);
               }}
-              className="absolute left-4 top-4 rounded-md bg-rose-300 px-4 py-1 text-rose-600 transition-all hover:bg-rose-600 hover:text-rose-100"
+              className="absolute left-4 top-4 rounded-md bg-rose-100 px-4 py-1 text-rose-500 transition-all hover:bg-rose-600 hover:text-rose-100"
             >
               <svg
                 width="24"
@@ -227,7 +229,7 @@ function CreatePostForm({ postToEdit = {} }) {
             <SpinnerMini />
           ) : (
             <button
-              className="w-full rounded-xl bg-[#C3CDFF] p-4 text-base font-[1000] text-[#1E2A44]"
+              className="col-span-2 w-full rounded-xl bg-[#2251D1]/80 p-4 text-base font-bold text-white"
               type="submit"
             >
               تایید

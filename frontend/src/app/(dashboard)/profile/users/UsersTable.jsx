@@ -1,9 +1,12 @@
+"use client";
+import { useUsers } from "@/hooks/useUsers";
 import Empty from "@/ui/Empty";
+import Table from "@/ui/Table";
+import UserRow from "./UserRow";
 
 function UsersTable() {
-  const { isLoading, users } = useUsers();
-
-  // if (isLoading) return <Loading />;
+  const { users, isLoading } = useUsers();
+  console.log(users);
 
   if (!users.length) return <Empty resourceName="کاربری" />;
 

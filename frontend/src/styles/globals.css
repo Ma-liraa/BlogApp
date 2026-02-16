@@ -39,45 +39,15 @@ body {
   font-family: var(--font-iranYekan);
   min-height: 100vh;
   user-select: text;
+  background-color: #dce4fb;
 }
 
-html, body {
+html,
+body {
   height: 100%;
   margin: 0;
 }
 
-
-.bg {
-  position: fixed;
-  inset: 0;
-  z-index: -1; 
-  overflow: hidden; 
-}
-
-.bg::before {
-  content: "";
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 160vmax;
-  height: 160vmax;
-  transform: translate(-50%, -50%) rotate(0deg);
-
-  background: conic-gradient(
-    #c3cdff 0deg,
-    #fcfcff 120deg,
-    #6284ff 240deg,
-    #c3cdff 360deg
-  );
-
-  animation: bg-rotate 15s linear infinite;
-}
-
-@keyframes bg-rotate {
-  to {
-    transform: translate(-50%, -50%) rotate(360deg);
-  }
-}
 
 
 @layer components {
