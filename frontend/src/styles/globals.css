@@ -4,23 +4,32 @@
 
 @layer base {
   :root {
-    --color-primary-900: 62, 123, 166;
-    --color-primary-800: 127, 165, 201;
-    --color-primary-200: 204, 225, 250;
-    --color-primary-100: 248, 244, 243;
+    /* تم جدید: بر پایه Blue-600 و Slate */
 
-    --color-text: 33, 33, 33;
-    --color-paragraph: 30, 30, 30;
-    --color-icon: 33, 33, 33;
+    /* Primary (Blue) - رنگ اصلی برند */
+    --color-primary-900: 30, 58, 138; /* blue-900 */
+    --color-primary-800: 37, 99, 235; /* blue-600 (Main Action) */
+    --color-primary-700: 29, 78, 216; /* blue-700 (Hover) */
+    --color-primary-200: 191, 219, 254; /* blue-200 */
+    --color-primary-100: 239, 246, 255; /* blue-50 (Backgrounds) */
 
-    --color-success-500: 61, 193, 60;
-    --color-success-100: 206, 239, 206;
+    /* Text & Neutral (Slate) - رنگ‌های متن و خنثی */
+    --color-text: 15, 23, 42; /* slate-900 */
+    --color-paragraph: 51, 65, 85; /* slate-700 */
+    --color-icon: 71, 85, 105; /* slate-500 */
+    --color-border: 226, 232, 240; /* slate-200 */
 
-    --color-warning-500: 243, 187, 27;
-    --color-warning-100: 252, 238, 198;
+    /* Success (Emerald) */
+    --color-success-500: 16, 185, 129;
+    --color-success-100: 209, 250, 229;
 
-    --color-error-500: 252, 0, 0;
-    --color-error-100: 255, 186, 186;
+    /* Warning (Amber) */
+    --color-warning-500: 245, 158, 11;
+    --color-warning-100: 254, 243, 199;
+
+    /* Error (Rose) */
+    --color-error-500: 244, 63, 94; /* rose-500 */
+    --color-error-100: 255, 228, 230; /* rose-100 */
   }
 }
 
@@ -36,66 +45,89 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: var(--font-iranYekan);
+  font-family:
+    var(--font-iranYekan),
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    "Helvetica Neue",
+    Arial,
+    sans-serif;
   min-height: 100vh;
   user-select: text;
-  background-color: #dce4fb;
+  /* پس‌زمینه کلی سایت مشابه صفحات قبلی */
+  background-color: #f8fafc; /* slate-50 */
+  color: rgb(var(--color-text));
 }
-
-html,
-body {
-  height: 100%;
-  margin: 0;
-}
-
-
 
 @layer components {
+  /* --- استایل فرم‌ها --- */
   .form {
-    @apply flex w-full max-w-lg flex-col gap-y-8 rounded-2xl bg-primary-100 p-4;
-  }
-  .textField__input {
-    @apply w-full border border-primary-100 bg-primary-100 p-4 text-primary-900 transition-all duration-300 ease-out hover:border-primary-800 focus:border-primary-800 focus:bg-primary-100 focus:shadow-lg focus:shadow-primary-200 dark:focus:shadow-primary-200;
-  }
-  .btn {
-    @apply rounded-xl px-3 py-3 transition-all duration-300;
-  }
-  .btn--primary {
-    @apply bg-primary-900 text-primary-100 hover:bg-primary-800;
-  }
-  .btn--primary {
-    @apply bg-primary-200 text-primary-100;
-  }
-  .btn--outline {
-    @apply border border-primary-100 text-primary-200;
-  }
-  .btn--danger {
-    @apply border border-rose-700 text-rose-700;
-  }
-  .badge {
-    @apply inline-block whitespace-nowrap rounded-xl px-2 py-0.5;
-  }
-  .badge--primary {
-    @apply bg-primary-100 text-primary-900;
-  }
-  .badge--primary {
-    @apply bg-primary-100 text-primary-800;
-  }
-  .badge--success {
-    @apply bg-green-200 text-green-600;
-  }
-  .badge--danger {
-    @apply bg-error-500 text-error-500;
+    @apply flex w-full max-w-lg flex-col gap-y-6 rounded-3xl bg-white p-6 shadow-xl shadow-slate-200/50 ring-1 ring-slate-100 md:p-8;
   }
 
+  /* --- استایل اینپوت‌ها --- */
+  .textField__input {
+    @apply w-full rounded-xl border border-slate-200 bg-white p-4 text-slate-700 placeholder-slate-400 transition-all duration-300 ease-out hover:border-blue-400 focus:border-blue-600 focus:bg-white focus:ring-4 focus:ring-blue-500/10;
+  }
+
+  /* --- استایل دکمه‌ها --- */
+  .btn {
+    @apply flex items-center justify-center gap-2 rounded-xl px-6 py-3 text-sm font-bold transition-all duration-300 active:scale-95;
+  }
+
+  /* دکمه اصلی (آبی) */
+  .btn--primary {
+    @apply bg-blue-600 text-white shadow-md shadow-blue-500/20 hover:-translate-y-0.5 hover:bg-blue-700 hover:shadow-lg;
+  }
+
+  /* دکمه ثانویه (کمرنگ) */
+  .btn--secondary {
+    @apply bg-blue-50 text-blue-600 hover:bg-blue-100;
+  }
+
+  /* دکمه دورخط (Outline) */
+  .btn--outline {
+    @apply border border-slate-200 bg-white text-slate-600 hover:bg-slate-50 hover:text-slate-900;
+  }
+
+  /* دکمه خطر (قرمز) */
+  .btn--danger {
+    @apply border border-rose-100 bg-rose-50 text-rose-600 hover:bg-rose-600 hover:text-white;
+  }
+
+  /* --- استایل بج‌ها (Badges) --- */
+  .badge {
+    @apply inline-flex items-center rounded-lg px-2.5 py-0.5 text-xs font-medium ring-1 ring-inset;
+  }
+  .badge--primary {
+    @apply bg-blue-50 text-blue-700 ring-blue-700/10;
+  }
+  .badge--secondary {
+    @apply bg-slate-50 text-slate-600 ring-slate-500/10;
+  }
+  .badge--success {
+    @apply bg-emerald-50 text-emerald-700 ring-emerald-600/20;
+  }
+  .badge--danger {
+    @apply bg-rose-50 text-rose-700 ring-rose-600/10;
+  }
+  .badge--warning {
+    @apply bg-amber-50 text-amber-700 ring-amber-600/20;
+  }
+
+  /* --- استایل لودرها --- */
   .spinner {
     margin: 3.2rem auto 1.6rem;
     width: 60px;
     aspect-ratio: 1;
     border-radius: 50%;
-    border: 8px solid rgb(var(--color-primary-900));
-    border-right-color: rgb(var(--color-primary-200));
-    animation: rotate 1s infinite linear;
+    border: 8px solid rgb(var(--color-primary-100)); /* آبی خیلی روشن */
+    border-right-color: rgb(var(--color-primary-800)); /* آبی اصلی */
+    animation: rotate 1s infinite cubic-bezier(0.68, -0.55, 0.27, 1.55); /* انیمیشن نرم‌تر */
   }
 
   .spinner-mini {
@@ -103,8 +135,8 @@ body {
     width: 20px;
     aspect-ratio: 1;
     border-radius: 50%;
-    border: 2px solid rgb(var(--color-primary-200));
-    border-right-color: transparent;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-right-color: white;
     animation: rotate 1s infinite linear;
   }
 
@@ -115,117 +147,141 @@ body {
   }
 }
 
+/* --- استایل تگ‌ها (React Tag Input) --- */
 .rti--container {
-  background-color: rgb(var(--color-primary-100));
-  --rti-radius: 0.375rem;
+  background-color: #ffffff !important;
+  --rti-radius: 0.75rem !important; /* rounded-xl */
   --rti-s: 0.5rem;
-  --rti-tag: #edf2f7;
-  --rti-tag-remove: #e53e3e;
-  border: none;
+  --rti-tag: rgb(var(--color-primary-100));
+  --rti-tag-remove: rgb(var(--color-error-500));
+  border: 1px solid rgb(var(--color-border)) !important;
+  transition: all 0.3s ease;
 }
+
+.rti--container:focus-within {
+  border-color: rgb(var(--color-primary-800)) !important;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1); /* ring effect */
+}
+
 .rti--container .rti--input {
-  background-color: rgb(var(--color-primary-200));
-  color: rgb(var(--color-primary-800));
-  padding: 0.3rem 1rem;
-  border-radius: 0.5rem;
+  background-color: transparent !important;
+  color: rgb(var(--color-text));
+  padding: 0.5rem;
 }
 
 .rti--tag {
-  background-color: rgb(var(--color-primary-500));
-  color: rgb(var(--color-primary-100));
+  background-color: rgb(var(--color-primary-100)) !important;
+  color: rgb(var(--color-primary-800)) !important;
+  padding: 0.25rem 0.75rem !important;
+  border-radius: 0.5rem !important;
+  font-weight: 500;
 }
 
+/* --- دکمه‌های عمومی --- */
 button {
   cursor: pointer;
   outline: none;
 }
 button:disabled {
   cursor: not-allowed;
-  background-color: rgb(var(--color-primary-300), 0.5);
-  color: rgb(var(--color-primary-700), 0.5);
+  opacity: 0.6;
+  filter: grayscale(100%);
   pointer-events: none;
   box-shadow: none;
 }
 
-/* inupt number */
+/* --- Input Number Styles --- */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-  /* display: none; <- Crashes Chrome on hover */
   -webkit-appearance: none;
-  margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+  margin: 0;
 }
 
 input[type="number"] {
-  -moz-appearance: textfield; /* Firefox */
+  -moz-appearance: textfield;
 }
 
-/* TABLE */
-
+/* --- جدول‌ها (Tables) --- */
 table {
-  border-collapse: collapse;
+  border-collapse: separate; /* برای گرد کردن گوشه‌ها */
   border-spacing: 0;
   width: 100%;
+  border-radius: 1rem;
+  overflow: hidden;
+  border: 1px solid rgb(var(--color-border));
 }
 
-table td,
 table th {
+  background-color: rgb(var(--color-primary-100));
+  color: rgb(var(--color-paragraph));
+  font-weight: 800;
+  padding: 1rem 1.5rem;
+  font-size: 0.9rem;
   text-align: right;
   white-space: nowrap;
 }
 
-table th {
-  font-weight: 1000;
+table td {
+  background-color: white;
+  border-top: 1px solid rgb(var(--color-border));
   padding: 1rem 1.5rem;
-  color: #1e2a44;
-  font-size: 0.9rem;
+  color: rgb(var(--color-text));
+  font-size: 0.875rem;
+  text-align: right;
+  white-space: nowrap;
+  transition: background-color 0.2s;
 }
+
+table tr:hover td {
+  background-color: #f8fafc; /* slate-50 on hover */
+}
+
 a {
   display: block;
-}
-table td {
-  font-weight: 800;
-  font-size: 0.85rem;
-  padding: 1rem 1.5rem;
-  color: #1e2a44;
+  text-decoration: none;
 }
 
-/* comment  indicator */
-
+/* --- کامنت‌ها (Threaded Comments) --- */
 .post-comments .post-comments__answer {
   position: relative;
+  margin-right: 1.5rem; /* فاصله بیشتر برای ایندنت */
 }
+
+/* خط عمودی اصلی */
 .post-comments .post-comments__answer::before {
   content: "";
   display: block;
   height: 100%;
   position: absolute;
-  right: -15px;
-  top: -13px;
-  width: 3px;
-  background-color: rgb(var(--color-primary-200));
+  right: -20px;
+  top: -15px;
+  width: 2px;
+  background-color: rgb(var(--color-border)); /* Slate-200 */
 }
 
+/* خط اتصال افقی */
 .post-comments .post-comments__answer .answer-item::before {
   content: "";
   display: block;
-  height: 3px;
+  height: 2px;
   position: relative;
-  right: -31px;
-  top: 57px;
-  width: 15px;
-  background-color: rgb(var(--color-primary-200));
+  right: -38px; /* تنظیم دقیق */
+  top: 45px; /* تنظیم بر اساس ارتفاع آواتار */
+  width: 18px;
+  background-color: rgb(var(--color-border));
   z-index: 10;
 }
 
+/* مخفی کردن ادامه خط برای آیتم آخر */
 .post-comments .post-comments__answer .last-item:after {
   content: "";
   display: block;
-  height: calc(100% - 80px);
+  height: calc(100% - 60px);
   position: absolute;
-  right: -15px;
-  top: 76px;
-  width: 4px;
-  background-color: rgb(var(--color-primary-200));
+  right: -20px;
+  top: 60px; /* شروع از پایین اتصال */
+  width: 4px; /* ضخامت بیشتر برای پوشاندن */
+  background-color: #f8fafc; /* رنگ پس‌زمینه سایت */
 }
 
 @media (max-width: 640px) {
@@ -233,10 +289,10 @@ table td {
     display: none;
   }
   .post-comments .post-comments__answer .answer-item::before {
-    width: 3px;
+    width: 2px;
     height: 14px;
-    right: 11px;
-    top: -13px;
+    right: 12px;
+    top: -15px;
     position: absolute;
   }
 }

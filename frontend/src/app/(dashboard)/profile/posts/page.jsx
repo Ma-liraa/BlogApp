@@ -21,7 +21,7 @@ async function page({ searchParams }) {
       <Suspense fallback={<Spinner />} key={query}>
         <PostsTable query={query} />
       </Suspense>
-      {totalPages && (
+      {totalPages > 9 && (
         <div className="mt-8 flex w-full justify-center">
           <Pagination totalPages={totalPages} />
         </div>

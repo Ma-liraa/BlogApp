@@ -12,7 +12,7 @@ export async function fetchCardData() {
     const data = await Promise.all([
       getAllCommentsApi(options),
       getAllUserApi(options),
-      getPostsApi(),
+      getPostsApi(options),
     ]);
 
     const numOfPosts = Number(data[2].posts.length ?? "0");

@@ -7,22 +7,21 @@ import { DeletePost, UpdatePost } from "./Buttons";
 const typeStyle = {
   free: {
     label: "رایگان",
-    className:
-      "rounded-md px-1.5 py-0.5 bg-teal-500/25 text-teal-800 inset-ring inset-ring-teal-600/25",
+    className: "badge badge--success",
   },
   premium: {
     label: "پولی",
-    className: "badge--primary",
+    className: "badge badge--primary",
   },
 };
 
 function PostRow({ index, post }) {
-  const { title, category, author, createdAt, type } = post;
+  const { title, category, author, createdAt, type, _id } = post;
   return (
     <Table.Row>
       <td>{toPersianDigits(index + 1)}</td>
       <td>{truncateText(title, 30)}</td>
-      <td>{category.title}</td>
+      <td>{category?.title}</td>
       <td>{author.name}</td>
       <td>{toLocalDateShort(createdAt)}</td>
       <td>
@@ -31,8 +30,8 @@ function PostRow({ index, post }) {
         </span>
       </td>
       <td>
-        <div className="jus flex items-center gap-x-3">
-          <UpdatePost id={post._id} />
+        <div className="jus flex items-center gap-x-1">
+          <UpdatePost id={_id} />
           <DeletePost post={post} />
         </div>
       </td>

@@ -11,7 +11,7 @@ async function CommentsTable({ query = "" }) {
     getPostsApi({}),
   ]);
 
-  if (!comments.length) return <Empty resourceName="کامنت" />;
+  if (!comments?.length) return <Empty resourceName="کامنت" />;
 
   return (
     <div className="overflow-x-auto">
@@ -26,7 +26,7 @@ async function CommentsTable({ query = "" }) {
           <th>عملیات</th>
         </Table.Header>
         <Table.Body>
-          {comments.map((comment, index) => {
+          {comments?.map((comment, index) => {
             const postTitle = posts.find((p) => p._id === comment.post)?.title;
             return (
               <CommetsRow

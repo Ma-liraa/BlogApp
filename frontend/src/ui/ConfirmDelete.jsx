@@ -4,7 +4,7 @@ import Button from "./Button";
 function ConfirmDelete({ resourceName, onClose, disabled, onConfirm }) {
   return (
     <div>
-      <h2 className="mb-8 text-base font-bold text-secondary-700">
+      <h2 className="text-secondary-700 mb-8 text-base font-bold">
         آیا از حذف {resourceName} مطمین هستید؟
       </h2>
       <form onSubmit={onConfirm}>

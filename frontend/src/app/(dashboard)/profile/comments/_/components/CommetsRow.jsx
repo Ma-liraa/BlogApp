@@ -18,7 +18,7 @@ function CommetsRow({ index, comment, postName }) {
     <Table.Row>
       <td>{toPersianDigits(index + 1)}</td>
       <td title={content.text}>{truncateText(content.text, 30)}</td>
-      <td>{user.name}</td>
+      <td>{user?.name || "نامشخص"}</td>
       <td>{postName ? truncateText(postName, 20) : "نامشخص"}</td>
       <td>{toLocalDateShort(createdAt)}</td>
       <td>
@@ -28,8 +28,7 @@ function CommetsRow({ index, comment, postName }) {
       </td>
       <td>
         <div className="flex items-center gap-x-2">
-          <DeleteComment commentId={_id} />
-          {/* می‌توانید دکمه تایید یا پاسخ را اینجا اضافه کنید */}
+          <DeleteComment id={_id} title={truncateText(content.text, 20)} />
         </div>
       </td>
     </Table.Row>

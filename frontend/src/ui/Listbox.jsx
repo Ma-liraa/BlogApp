@@ -4,93 +4,100 @@ import {
   ListboxButton,
   ListboxOption,
   ListboxOptions,
+  Transition,
 } from "@headlessui/react";
-import { ChevronDownIcon } from "@heroicons/react/20/solid";
-import { CheckIcon } from "@heroicons/react/24/outline";
-import clsx from "clsx";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useState } from "react";
+import {
+  ChevronDownIcon,
+  CheckIcon,
+  Squares2X2Icon,
+} from "@heroicons/react/20/solid";
+import { useRouter, usePathname, useSearchParams } from "next/navigation";
+import { Fragment, useState } from "react";
 
-export default function ListBox({ categories }) {
+export default function ListBox({
+  categories,
+  label = "دسته‌بندی",
+  paramName = "category",
+}) {
+  const router = useRouter();
   const pathname = usePathname();
-  const newCategorys = [{ title: "همه", slug: "/blog" }, ...categories];
-  const [selected, setSelected] = useState(newCategorys[0]);
+  const searchParams = useSearchParams();
+
+  // تبدیل دسته‌بندی‌ها به ساختار مناسب برای منو
+  const options = [
+    { title: "همه موارد", slug: "all", englishTitle: "all" },
+    ...categories,
+  ];
+
+  // پیدا کردن گزینه فعال بر اساس URL
+  const currentSlug = pathname.split("/").pop();
+  const activeOption =
+    options.find((opt) => opt.slug === currentSlug) || options[0];
+
+  const [selected, setSelected] = useState(activeOption);
+
+  const handleSelect = (option) => {
+    setSelected(option);
+    if (option.slug === "all") {
+      router.push("/blogs");
+    } else {
+      router.push(`/blogs/category/${option.slug}`);
+    }
+  };
 
   return (
-    <div key={categories._id}>
-      <Listbox value={selected} onChange={setSelected}>
-        <ListboxButton
-          className={clsx(
-            "relative block w-full rounded-b-2xl rounded-t-[10px] bg-primary-200 py-4 pl-8 pr-4 text-right text-sm text-text",
-            "focus:not-data-focus:outline-none data-focus:outline-2 data-focus:-outline-offset-2 data-focus:outline-text font-bold",
-          )}
-        >
-          {selected.title}
-          <ChevronDownIcon
-            className="group pointer-events-none absolute left-2.5 top-[18px] size-4 fill-icon"
-            aria-hidden="true"
-          />
-        </ListboxButton>
-        <ListboxOptions
-          anchor="bottom"
-          transition
-          className={clsx("w-[200px] space-y-1 rounded-xl bg-primary-200 p-2")}
-        >
-          <Link href={"/blogs"}>
-            <ListboxOption
-              key="/blogs"
-              value={newCategorys[0]}
-              className={`data-focus:bg-primary-900 group flex cursor-pointer items-center justify-between gap-2 rounded-lg px-3 py-2 transition-all hover:bg-primary-100 ${"blogs" == pathname.split("/")[1] && pathname.split("/").length === 2 ? "bg-primary-100" : ""}`}
-            >
-              <div className="text-sm text-text">همه</div>
-              {"blogs" == pathname.split("/")[1] &&
-              pathname.split("/").length == 2 ? (
-                <svg
-                  className="h-4 w-4 stroke-icon"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
+    <div className="w-full">
+      <Listbox value={selected} onChange={handleSelect}>
+        <div className="relative mt-1">
+          <ListboxButton className="relative w-full cursor-pointer rounded-2xl border border-slate-200 bg-white py-3.5 pl-10 pr-4 text-right shadow-sm transition-all hover:border-blue-300 focus:outline-none focus:ring-4 focus:ring-blue-500/10 sm:text-sm">
+            <span className="flex items-center gap-2 truncate font-bold text-slate-700">
+              <Squares2X2Icon className="h-5 w-5 text-blue-500" />
+              {selected.title}
+            </span>
+            <span className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-2">
+              <ChevronDownIcon
+                className="h-5 w-5 text-slate-400"
+                aria-hidden="true"
+              />
+            </span>
+          </ListboxButton>
+
+          <Transition
+            as={Fragment}
+            leave="transition ease-in duration-100"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
+          >
+            <ListboxOptions className="absolute z-50 mt-2 max-h-60 w-full overflow-auto rounded-2xl bg-white p-1 text-base shadow-2xl ring-1 ring-slate-200 focus:outline-none sm:text-sm">
+              {options.map((option) => (
+                <ListboxOption
+                  key={option.englishTitle || option.slug}
+                  className={({ active, selected }) =>
+                    `relative cursor-pointer select-none rounded-xl py-3 pl-10 pr-4 transition-colors ${
+                      active ? "bg-blue-50 text-blue-700" : "text-slate-600"
+                    } ${selected ? "bg-blue-50/50 font-bold text-blue-600" : ""}`
+                  }
+                  value={option}
                 >
-                  <path
-                    d="M7 12.9L10.1429 16.5L18 7.5"
-                    stroke="black"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              ) : null}
-            </ListboxOption>
-          </Link>
-          {categories.map((category) => (
-            <Link href={`/blogs/category/${category.slug}`}>
-              <ListboxOption
-                key={category.englishTitle}
-                value={category}
-                className={`data-focus:bg-primary-900 group flex cursor-pointer items-center justify-between gap-2 rounded-lg px-3 py-2 transition-all hover:bg-primary-100 ${category.englishTitle == pathname.split("/")[3] ? "bg-primary-100" : ""}`}
-              >
-                <div className="text-sm text-text">{category.title}</div>
-                {category.englishTitle == pathname.split("/")[3] ? (
-                  <svg
-                    className="h-4 w-4 stroke-icon"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M7 12.9L10.1429 16.5L18 7.5"
-                      stroke="black"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                ) : null}
-              </ListboxOption>
-            </Link>
-          ))}
-        </ListboxOptions>
+                  {({ selected }) => (
+                    <>
+                      <span
+                        className={`block truncate ${selected ? "font-bold" : "font-medium"}`}
+                      >
+                        {option.title}
+                      </span>
+                      {selected ? (
+                        <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-blue-600">
+                          <CheckIcon className="h-5 w-5" aria-hidden="true" />
+                        </span>
+                      ) : null}
+                    </>
+                  )}
+                </ListboxOption>
+              ))}
+            </ListboxOptions>
+          </Transition>
+        </div>
       </Listbox>
     </div>
   );

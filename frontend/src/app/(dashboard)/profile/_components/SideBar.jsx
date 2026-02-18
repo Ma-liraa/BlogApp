@@ -2,38 +2,20 @@
 
 import Link from "next/link";
 import SideBarNavs from "./SideBarNavs";
+import { Hexagon } from "lucide-react";
 
 function SideBar() {
   return (
     <div className="sticky top-4 h-full overflow-y-auto rounded-[35px] bg-white p-4">
       <div className={`flex h-full flex-col justify-between gap-y-4`}>
         <div className="flex w-full flex-col gap-y-4">
+          {/* لوگو */}
           <Link href="/">
-            <div className={`flex items-center gap-x-2`}>
-              <span className="flex h-[60px] w-[60px] items-center justify-center rounded-full bg-[#E5F6FF] font-[1000] transition-all duration-300 ease-out hover:scale-95 active:scale-95">
-                <svg
-                  width="28"
-                  height="28"
-                  viewBox="0 0 28 28"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M15.5095 8.36548L13.9997 14L12.49 19.6346"
-                    stroke="#3072EE"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                  />
-                  <path
-                    d="M8.16659 3.89412C9.8826 2.90146 11.8749 2.33333 13.9999 2.33333C20.4432 2.33333 25.6666 7.55667 25.6666 14C25.6666 20.4433 20.4432 25.6667 13.9999 25.6667C7.5566 25.6667 2.33325 20.4433 2.33325 14C2.33325 11.875 2.90139 9.88267 3.89404 8.16666"
-                    stroke="#3072EE"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                  />
-                </svg>
-              </span>
-
-              <span className="text-[20px] font-[1000] text-[#3072EE] transition-all duration-300 ease-out hover:scale-95 active:scale-95">
+            <div className="flex items-center justify-center gap-x-3 py-2">
+              <div className="flex h-14 w-14 items-center justify-center rounded-[20px] bg-blue-50 text-blue-600">
+                <Hexagon className="h-8 w-8 stroke-[2.5]" />
+              </div>
+              <span className="text-xl font-black tracking-tight text-slate-800">
                 وبلاگینو
               </span>
             </div>
@@ -43,7 +25,7 @@ function SideBar() {
           <div>
             <Link href="#">
               <button
-                className={`relative flex w-full cursor-pointer items-center gap-x-2 rounded-full bg-[#E5F6FF] px-4 py-2.5 transition-all duration-300 ease-out hover:scale-105 active:scale-95`}
+                className={`relative flex w-full cursor-pointer items-center gap-x-2 rounded-[20px] bg-[#E5F6FF] px-2.5 py-2.5 transition-all duration-300 ease-out hover:scale-105 active:scale-95`}
               >
                 <div className="flex w-full items-center justify-between gap-x-2">
                   <div className="flex items-center gap-x-2">
@@ -111,13 +93,13 @@ function SideBar() {
               </button>
             </Link>
           </div>
-          <div className="h-[3px] w-[45px] self-center rounded-full bg-[#2251D1]/20"></div>
+          <div className="h-[3px] w-[45px] self-center rounded-[20px] bg-[#2251D1]/20"></div>
           {/* list items */}
           <SideBarNavs />
         </div>
 
         <button
-          className={`relative flex h-[50px] w-full cursor-pointer items-center gap-x-2 rounded-full bg-[#FFF0E9] px-4 py-2.5 transition-all duration-300 ease-out hover:scale-105 active:scale-95`}
+          className={`relative flex h-[50px] w-full cursor-pointer items-center gap-x-2 rounded-[20px] bg-[#FFF0E9] px-4 py-2.5 transition-all duration-300 ease-out hover:scale-105 active:scale-95`}
         >
           <div className="flex items-center gap-x-1">
             <span className={`text-[#EB5738]`}>

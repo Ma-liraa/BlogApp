@@ -11,7 +11,7 @@ function page() {
           { label: "ایجاد پست", href: "/profile/posts/create", active: true },
         ]}
       />
-      <div className="flex justify-center max-w-screen-sm mx-auto">
+      <div>
         <CreatePostForm />
       </div>
     </div>

@@ -192,87 +192,6 @@ const sidebarNavs = [
   },
   {
     id: 5,
-    title: "پسندیده‌ها",
-    icon: (
-      <svg
-        width="20"
-        height="20"
-        viewBox="0 0 20 20"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <g clipPath="url(#clip0_14_84)">
-          <path
-            d="M10 1.66669V3.33335"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-          />
-          <path
-            d="M10 16.6667V18.3334"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-          />
-          <path
-            d="M1.66675 10L3.33341 10"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-          />
-          <path
-            d="M16.6667 10L18.3334 10"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-          />
-          <path
-            d="M5 15L5.28587 14.7141"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-          />
-          <path
-            d="M14.7139 5.28607L14.9999 5.00002"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-          />
-          <path
-            d="M15 15L14.7141 14.7141"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-          />
-          <path
-            d="M5.28613 5.28607L5.00008 5.00002"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-          />
-          <path
-            d="M8.98733 12.7949L8.51832 13.3801L8.98733 12.7949ZM5.91675 9.48301C5.91675 9.89723 6.25253 10.233 6.66675 10.233C7.08096 10.233 7.41675 9.89723 7.41675 9.48301H6.66675H5.91675ZM10.0001 8.2508L9.45547 8.76645C9.59712 8.91605 9.79406 9.0008 10.0001 9.0008C10.2061 9.0008 10.403 8.91605 10.5447 8.76645L10.0001 8.2508ZM11.0128 12.7949L11.4818 13.3801L11.0128 12.7949ZM8.65601 11.5721C8.33832 11.3063 7.86531 11.3484 7.59952 11.6661C7.33373 11.9838 7.3758 12.4568 7.69349 12.7226L8.17475 12.1474L8.65601 11.5721ZM6.66675 9.48301H7.41675C7.41675 8.93291 7.72178 8.50476 8.08698 8.33507C8.40142 8.18896 8.89613 8.1757 9.45547 8.76645L10.0001 8.2508L10.5447 7.73514C9.60409 6.74171 8.43213 6.52066 7.45489 6.97475C6.5284 7.40526 5.91675 8.38531 5.91675 9.48301H6.66675ZM8.98733 12.7949L8.51832 13.3801C8.6844 13.5132 8.89459 13.6817 9.11545 13.8129C9.33577 13.9438 9.63988 14.0833 10.0001 14.0833V13.3333V12.5833C10.0269 12.5833 9.99772 12.5923 9.88152 12.5233C9.76586 12.4546 9.63634 12.3538 9.45633 12.2096L8.98733 12.7949ZM11.0128 12.7949L11.4818 13.3801C11.928 13.0226 12.5908 12.545 13.1057 11.9556C13.6463 11.3368 14.0834 10.537 14.0834 9.48301H13.3334H12.5834C12.5834 10.0769 12.3506 10.54 11.9761 10.9687C11.5759 11.4268 11.0784 11.7812 10.5438 12.2096L11.0128 12.7949ZM13.3334 9.48301H14.0834C14.0834 8.38531 13.4718 7.40526 12.5453 6.97475C11.568 6.52066 10.3961 6.74171 9.45547 7.73514L10.0001 8.2508L10.5447 8.76645C11.104 8.1757 11.5987 8.18896 11.9132 8.33507C12.2784 8.50476 12.5834 8.93291 12.5834 9.48301H13.3334ZM11.0128 12.7949L10.5438 12.2096C10.3638 12.3538 10.2343 12.4546 10.1186 12.5233C10.0024 12.5923 9.97322 12.5833 10.0001 12.5833V13.3333V14.0833C10.3603 14.0833 10.6644 13.9438 10.8847 13.8129C11.1056 13.6817 11.3158 13.5132 11.4818 13.3801L11.0128 12.7949ZM8.98733 12.7949L9.45633 12.2096C9.17336 11.9828 8.92639 11.7983 8.65601 11.5721L8.17475 12.1474L7.69349 12.7226C7.97343 12.9568 8.28842 13.1959 8.51832 13.3801L8.98733 12.7949Z"
-            fill="currentColor"
-          />
-        </g>
-        <defs>
-          <clipPath id="clip0_14_84">
-            <rect width="20" height="20" rx="5" fill="white" />
-          </clipPath>
-        </defs>
-      </svg>
-    ),
-    classNames: {
-      boxItem: "bg-[#FAE2EE]",
-      boxIcon: "bg-[#A84570]",
-      textColor: "text-[#A84570]",
-      iconMainColor: "text-[#FAE2EE]",
-      iconSecendaryColor: "text-[#A84570]",
-    },
-    href: "/profile/users",
-  },
-  {
-    id: 6,
     title: "نظرات",
     icon: (
       <svg
@@ -319,7 +238,7 @@ export default function SideBarNavs() {
         return (
           <Link href={nav.href} key={nav.id}>
             <li
-              className={`relative flex items-center gap-x-2 rounded-full px-4 py-2.5 transition-all duration-300 ease-out hover:scale-105 active:scale-95 ${nav.classNames.boxItem} `}
+              className={`relative flex items-center gap-x-2 rounded-[20px] px-2.5 py-2.5 transition-all duration-300 ease-out hover:scale-105 active:scale-95 ${nav.classNames.boxItem} `}
             >
               <div className="flex w-full items-center justify-between gap-x-2">
                 <div className="flex items-center gap-x-2">

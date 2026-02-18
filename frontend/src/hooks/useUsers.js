@@ -7,7 +7,7 @@ export function useUsers() {
     queryFn: getAllUserApi,
   });
 
-  const { users } = data || [];
+  const  users  = data || [];
 
   return { isLoading, users };
 }

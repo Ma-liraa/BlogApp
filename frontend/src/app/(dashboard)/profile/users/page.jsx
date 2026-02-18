@@ -8,7 +8,7 @@ import UsersTable from "./UsersTable";
 
 async function page({ searchParams }) {
   const query = queryString.stringify(searchParams);
-  const { totalPages } = await getPostsApi(query);
+  // const { totalPages } = await getPostsApi(query);
 
   return (
     <div>
@@ -17,11 +17,11 @@ async function page({ searchParams }) {
         <Search />
       </div>
       <Suspense fallback={<Spinner />} key={query}>
-        <UsersTable query={query} />
+        <UsersTable />
       </Suspense>
-      <div className="mt-8 flex w-full justify-center">
+      {/* <div className="mt-8 flex w-full justify-center">
         <Pagination totalPages={totalPages} />
-      </div>
+      </div> */}
     </div>
   );
 }

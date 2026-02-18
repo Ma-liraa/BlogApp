@@ -44,11 +44,11 @@ export function DeletePost({ post: { _id, title } }) {
     <>
       <button
         onClick={() => setOpen(true)}
-        className="flex items-center justify-center rounded-md bg-rose-400/20 px-4 py-2 text-rose-600 transition-all hover:text-rose-700"
+        className="flex items-center justify-center rounded-[10px] bg-rose-400/20 px-3 py-1.5 text-rose-600 transition-all hover:text-rose-700"
       >
         <svg
-          width="24"
-          height="24"
+          width="20"
+          height="20"
           viewBox="0 0 24 24"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -88,7 +88,7 @@ export function DeletePost({ post: { _id, title } }) {
 export function UpdatePost({ id }) {
   return (
     <Link href={`/profile/posts/${id}/edit`}>
-      <button className="flex items-center justify-center rounded-md bg-[#2251D1]/20 px-4 py-2 text-[#2251D1] transition-all hover:text-[#3B66FF]">
+      <button className="flex items-center justify-center rounded-[10px] bg-[#2251D1]/20 px-3 py-1.5 text-[#2251D1] transition-all hover:text-[#3B66FF]">
         <svg
           width="20"
           height="20"

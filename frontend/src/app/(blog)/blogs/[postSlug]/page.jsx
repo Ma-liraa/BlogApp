@@ -5,213 +5,354 @@ import React from "react";
 import RelatedPost from "../_components/RelatedPost";
 import PostComment from "../_components/comment/PostComment";
 import { toLocalDateShort } from "@/utils/dateFormatter";
+import {
+  Clock,
+  CalendarDays,
+  UserCircle2,
+  Bookmark,
+  Heart,
+  Share2,
+  MessageCircle,
+  ChevronLeft,
+} from "lucide-react";
 import Link from "next/link";
 
 export async function generateMetadata({ params }) {
   const post = await getPostBySlug(params.postSlug);
-  return { title: `پست ${post.title}` };
+  return { title: post.title };
 }
 
 async function SinglePost({ params }) {
   const post = await getPostBySlug(params.postSlug);
   if (!post) notFound();
-  console.log(new Date(post.createdAt).toLocaleTimeString());
 
   return (
-    <div className="mb-24 flex flex-col gap-y-6 md:mb-0">
-      {/* img post */}
-      <div className="relative h-[300px] w-full overflow-hidden rounded-b-[20px] md:h-[250px]">
-        <Image
-          className="object-cover object-center"
-          fill
-          src={post.coverImageUrl}
-          alt={post.briefText}
-        />
-        
-        <div className="absolute right-4 top-4 rounded-full bg-[#C3CDFF]/70 px-3 py-1.5 text-sm font-[1000] text-[#1E2A44] backdrop-blur-sm">
-          {post.category.title}
-        </div>
-        <div className="absolute left-4 top-4 rounded-full bg-[#C3CDFF]/70 px-3 py-1.5 text-sm font-[1000] text-[#1E2A44] backdrop-blur-sm">
-          {post.category.title}
-        </div>
-        {/* like and save */}
-        <div className="absolute bottom-4 left-4 flex items-center gap-x-2">
-          <button className="flex h-[50px] w-[50px] items-center justify-center rounded-full bg-white text-[#1E2A44] hover:text-[#3B66FF]">
-            <svg
-              className="h-5 w-5"
-              viewBox="0 0 18 18"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fillRule="evenodd"
-                clipRule="evenodd"
-                d="M15.75 8.32312V12.0682C15.75 14.3906 15.75 15.5519 15.1994 16.0592C14.9368 16.3013 14.6054 16.4533 14.2523 16.4936C13.512 16.5784 12.6475 15.8137 10.9184 14.2843C10.1541 13.6084 9.7719 13.2703 9.32978 13.1813C9.11205 13.1374 8.88795 13.1374 8.67022 13.1813C8.2281 13.2703 7.8459 13.6084 7.08162 14.2843C5.35255 15.8137 4.48802 16.5784 3.74769 16.4936C3.39461 16.4533 3.06316 16.3013 2.80058 16.0592C2.25 15.5519 2.25 14.3906 2.25 12.0682V8.32312C2.25 5.10668 2.25 3.49845 3.23851 2.49922C4.22703 1.5 5.81802 1.5 9 1.5C12.1819 1.5 13.773 1.5 14.7615 2.49922C15.75 3.49845 15.75 5.10668 15.75 8.32312ZM6.1875 4.5C6.1875 4.18934 6.43934 3.9375 6.75 3.9375H11.25C11.5607 3.9375 11.8125 4.18934 11.8125 4.5C11.8125 4.81066 11.5607 5.0625 11.25 5.0625H6.75C6.43934 5.0625 6.1875 4.81066 6.1875 4.5Z"
-                fill="currentcolor"
-              />
-            </svg>
-          </button>
-          <button className="flex h-[50px] w-[50px] items-center justify-center rounded-full bg-white text-[#1E2A44] hover:text-[#3B66FF]">
-            <span>
-              <svg
-                className="h-5 w-5"
-                viewBox="0 0 18 18"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M1.5 6.85301C1.5 10.5002 4.51457 12.4437 6.7213 14.1834C7.5 14.7972 8.25 15.3752 9 15.3752C9.75 15.3752 10.5 14.7972 11.2787 14.1834C13.4854 12.4437 16.5 10.5002 16.5 6.85301C16.5 3.2058 12.3749 0.619282 9 4.12566C5.62512 0.619282 1.5 3.2058 1.5 6.85301Z"
-                  fill="currentcolor"
-                />
-              </svg>
+    <div className="container mx-auto max-w-[1440px] px-4 py-8 lg:px-8">
+      {/* =========================================================================
+          HERO SECTION (SPLIT LAYOUT)
+          دسکتاپ: متن راست | عکس چپ
+          موبایل: عکس بالا | متن پایین
+      ========================================================================= */}
+      <header className="mb-16 grid grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-16">
+        {/* --- ستون محتوای متنی (عنوان و ...) --- */}
+        <div className="order-2 flex flex-col gap-y-6 lg:order-1 lg:col-span-7">
+          {/* Breadcrumb / Category */}
+          <div className="flex items-center gap-2">
+            <span className="flex h-2 w-2 rounded-full bg-blue-600"></span>
+            <span className="text-sm font-bold text-blue-600">
+              {post.category?.title || "دسته بندی"}
             </span>
-          </button>
+          </div>
+
+          {/* Title */}
+          <h1 className="text-3xl font-black leading-tight text-slate-900 md:text-4xl lg:text-5xl lg:leading-[1.2]">
+            {post.title}
+          </h1>
+
+          {/* Brief Text (Lead Paragraph) */}
+          <p className="text-lg font-medium leading-relaxed text-slate-500 md:text-xl">
+            {post.briefText}
+          </p>
+
+          {/* Author & Meta Data */}
+          <div className="mt-4 flex flex-wrap items-center gap-4 border-t border-slate-100 pt-6">
+            {/* Author Profile */}
+            <div className="flex items-center gap-3">
+              <div className="relative h-12 w-12 overflow-hidden rounded-full border-2 border-white shadow-md shadow-slate-200">
+                {/* اگر عکس نویسنده دارید جایگزین کنید */}
+                <div className="flex h-full w-full items-center justify-center bg-blue-50 text-blue-600">
+                  <UserCircle2 className="h-8 w-8" />
+                </div>
+              </div>
+              <div className="flex flex-col">
+                <span className="text-sm font-bold text-slate-800">
+                  {post.author.name}
+                </span>
+                <span className="text-[10px] text-slate-400">نویسنده ارشد</span>
+              </div>
+            </div>
+
+            <div className="hidden h-8 w-px bg-slate-200 sm:block"></div>
+
+            {/* Date & Time */}
+            <div className="flex items-center gap-4 text-xs font-bold text-slate-500 sm:text-sm">
+              <div className="flex items-center gap-1.5">
+                <CalendarDays className="h-4 w-4" />
+                <span>{toLocalDateShort(post.createdAt)}</span>
+              </div>
+              <div className="flex items-center gap-1.5 rounded-lg bg-blue-50 px-2 py-1 text-blue-700">
+                <Clock className="h-3.5 w-3.5" />
+                <span>{post.readingTime} دقیقه مطالعه</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* --- ستون تصویر (Image) --- */}
+        <div className="relative order-1 lg:order-2 lg:col-span-5">
+          {/* افکت Glow پشت عکس */}
+          <div className="absolute -inset-4 rounded-[40px] bg-gradient-to-tr from-blue-100 to-indigo-100 opacity-70 blur-2xl"></div>
+
+          {/* کانتینر عکس */}
+          <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[32px] shadow-2xl shadow-blue-900/10 ring-4 ring-white lg:aspect-square">
+            <Image
+              className="object-cover transition-transform duration-700 hover:scale-105"
+              fill
+              src={post.coverImageUrl}
+              alt={post.title}
+              priority
+            />
+          </div>
+        </div>
+      </header>
+
+      {/* =========================================================================
+          MAIN CONTENT AREA (GRID)
+      ========================================================================= */}
+      <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
+        {/* --- سایدبار ابزارک‌ها (Sticky Sidebar Left) --- */}
+        <div className="hidden lg:col-span-1 lg:block">
+          <div className="sticky top-32 flex flex-col items-center gap-6">
+            <FloatingActionBtn
+              icon={<Heart />}
+              count={post.likesCount || 120}
+              activeColor="text-rose-500"
+            />
+            <FloatingActionBtn
+              icon={<Bookmark />}
+              activeColor="text-blue-600"
+            />
+            <FloatingActionBtn icon={<Share2 />} />
+            <div className="h-px w-8 bg-slate-200"></div>
+            <FloatingActionBtn
+              icon={<MessageCircle />}
+              count={post.commentsCount || 4}
+            />
+          </div>
+        </div>
+
+        {/* --- متن اصلی مقاله --- */}
+        <div className="lg:col-span-7">
+          <article className="prose prose-lg prose-slate prose-headings:font-black prose-headings:tracking-tight prose-headings:text-slate-800 prose-p:leading-loose prose-p:text-slate-600 prose-a:text-blue-600 prose-a:no-underline hover:prose-a:underline prose-img:rounded-3xl prose-img:shadow-lg prose-strong:text-slate-800 max-w-none">
+            {post.text}
+          </article>
+
+          {/* تگ‌ها (نمونه) */}
+          <div className="mt-12 flex flex-wrap gap-2 border-t border-slate-100 pt-8">
+            {["تکنولوژی", "برنامه‌نویسی", "ری‌اکت"].map((tag) => (
+              <span
+                key={tag}
+                className="cursor-pointer rounded-lg bg-slate-50 px-3 py-1.5 text-xs font-bold text-slate-500 transition-colors hover:bg-blue-50 hover:text-blue-600"
+              >
+                #{tag}
+              </span>
+            ))}
+          </div>
+
+          {/* بخش نظرات */}
+          <div className="mt-16">
+            <div className="mb-8 flex items-center gap-3">
+              <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-50 text-blue-600">
+                <MessageCircle className="h-6 w-6" />
+              </span>
+              <h3 className="text-2xl font-black text-slate-800">گفتگوها</h3>
+            </div>
+            <div className="rounded-3xl bg-slate-50/50 p-6 md:p-8">
+              <PostComment post={post} />
+            </div>
+          </div>
+        </div>
+
+        {/* --- سایدبار پیشنهادات (Right) --- */}
+        <div className="lg:col-span-4">
+          <div className="sticky top-24 space-y-8">
+            {/* پست‌های مرتبط */}
+            {post.related && post.related.length > 0 && (
+              <div className="rounded-[32px] bg-white p-6 shadow-xl shadow-slate-200/50 ring-1 ring-slate-100">
+                <div className="mb-6 flex items-center justify-between">
+                  <h4 className="text-lg font-black text-slate-800">
+                    مطالب مرتبط
+                  </h4>
+                  <Link
+                    href="/blogs"
+                    className="flex items-center text-xs font-bold text-blue-600 hover:text-blue-700"
+                  >
+                    مشاهده همه <ChevronLeft className="h-3 w-3" />
+                  </Link>
+                </div>
+                <div className="flex flex-col gap-6">
+                  <RelatedPost posts={post.related} />
+                </div>
+              </div>
+            )}
+
+            {/* --- سایدبار (Sticky Sidebar) --- */}
+            <div className="lg:col-span-4">
+              <div className="sticky top-24 flex flex-col gap-8">
+                {/* 1. کارت نویسنده (طراحی جدید) */}
+                <div className="group relative overflow-hidden rounded-[32px] bg-slate-900 p-6 text-white shadow-2xl shadow-blue-900/20 transition-all hover:shadow-blue-900/30">
+                  {/* پترن پس‌زمینه (برای عمق دادن) */}
+                  <div className="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-blue-600 opacity-40 blur-[60px] transition-opacity duration-500 group-hover:opacity-60"></div>
+                  <div className="absolute -left-10 bottom-0 h-32 w-32 rounded-full bg-indigo-600 opacity-40 blur-[60px] transition-opacity duration-500 group-hover:opacity-60"></div>
+
+                  <div className="relative z-10 flex flex-col items-center text-center">
+                    {/* آواتار با حلقه متحرک */}
+                    <div className="relative mb-4">
+                      <div className="animate-spin-slow absolute inset-0 rounded-full border-2 border-dashed border-white/20"></div>
+                      <div className="flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-tr from-blue-500 to-indigo-600 shadow-lg ring-4 ring-slate-800">
+                        {/* اگر عکس واقعی دارید جایگزین کنید */}
+                        <UserCircle2 className="h-10 w-10 text-white" />
+                      </div>
+                      <div className="absolute bottom-0 right-0 flex h-5 w-5 items-center justify-center">
+                        {/* لایه اول: انیمیشن موج‌دار (Ping) */}
+                        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"></span>
+
+                        {/* لایه دوم: نقطه ثابت با رنگ گرادینت و حاشیه */}
+                        <span className="relative inline-flex h-4 w-4 rounded-full bg-gradient-to-tr from-emerald-400 to-green-500 shadow-[0_0_10px_rgba(52,211,153,0.6)] ring-2 ring-slate-900"></span>
+                      </div>
+                    </div>
+
+                    <h3 className="text-xl font-black tracking-tight">
+                      {post.author.name}
+                    </h3>
+                    <p className="mb-4 text-xs font-medium text-blue-200">
+                      عضویت:
+                      {toLocalDateShort(post.author.createdAt || Date.now())}
+                    </p>
+
+                    {/* بیوگرافی کوتاه */}
+                    <p className="mb-6 line-clamp-3 text-sm leading-relaxed text-slate-300/90">
+                      علاقمند به دنیای وب و تکنولوژی‌های جدید. اشتراک دانش و
+                      تجربیات برنامه نویسی هدف اصلی من است.
+                    </p>
+
+                    {/* آمار (تعداد پست و ...) */}
+                    <div className="mb-6 flex w-full justify-center gap-8 border-y border-white/10 py-4">
+                      <div className="flex flex-col items-center">
+                        <span className="text-lg font-bold text-white">12</span>
+                        <span className="text-[10px] text-slate-400">
+                          مـقاله
+                        </span>
+                      </div>
+                      <div className="h-full w-px bg-white/10"></div>
+                      <div className="flex flex-col items-center">
+                        <span className="text-lg font-bold text-white">
+                          1.2k
+                        </span>
+                        <span className="text-[10px] text-slate-400">
+                          بازدید
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* دکمه پروفایل */}
+                    <button className="w-full rounded-2xl bg-white py-3 text-sm font-bold text-slate-900 shadow-lg transition-all hover:-translate-y-0.5 hover:bg-blue-50 hover:shadow-blue-500/20 active:scale-95">
+                      مشاهده پروفایل کامل
+                    </button>
+                  </div>
+                </div>
+
+                {/* 2. لیست پست‌های مشابه (زیر نویسنده) */}
+                {post.related && post.related.length > 0 && (
+                  <div className="flex flex-col gap-5">
+                    {/* تیتر بخش */}
+                    <div className="flex items-center justify-between px-2">
+                      <h4 className="flex items-center gap-2 text-lg font-black text-slate-800">
+                        <span className="h-2 w-2 rounded-full bg-blue-600"></span>
+                        پیشنهادهای ویژه
+                      </h4>
+                      <Link
+                        href="/blogs"
+                        className="text-xs font-bold text-blue-500 hover:text-blue-700"
+                      >
+                        مشاهده همه
+                      </Link>
+                    </div>
+
+                    {/* لیست کارت‌های کوچک */}
+                    <div className="flex flex-col gap-4">
+                      {post.related.map((item) => (
+                        <Link
+                          key={item._id}
+                          href={`/blogs/${item.slug}`}
+                          className="group"
+                        >
+                          <div className="flex items-center gap-4 rounded-3xl bg-white p-3 shadow-sm ring-1 ring-slate-100 transition-all duration-300 hover:bg-blue-50/50 hover:shadow-md hover:ring-blue-100">
+                            {/* تصویر بندانگشتی (Thumbnail) */}
+                            <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-2xl">
+                              <Image
+                                src={item.coverImageUrl}
+                                alt={item.title}
+                                fill
+                                className="object-cover transition-transform duration-500 group-hover:scale-110"
+                              />
+                            </div>
+
+                            {/* اطلاعات پست */}
+                            <div className="flex flex-col justify-center gap-1.5 overflow-hidden">
+                              <h5 className="truncate text-sm font-bold text-slate-700 transition-colors group-hover:text-blue-600">
+                                {item.title}
+                              </h5>
+
+                              <div className="flex items-center gap-2 text-[10px] font-medium text-slate-400">
+                                <span className="flex items-center gap-1">
+                                  <Clock className="h-3 w-3" />
+                                  {item.readingTime} دقیقه
+                                </span>
+                                <span className="h-1 w-1 rounded-full bg-slate-300"></span>
+                                <span>{toLocalDateShort(item.createdAt)}</span>
+                              </div>
+                            </div>
+
+                            {/* آیکون فلش (فقط در هاور نمایش داده می‌شود) */}
+                            <div className="ml-2 mr-auto text-blue-500 opacity-0 transition-all duration-300 group-hover:-translate-x-1 group-hover:opacity-100">
+                              <ChevronLeft className="h-4 w-4" />
+                            </div>
+                          </div>
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <div className="flex flex-col gap-6 px-6 md:flex-row">
-        <div className="flex flex-col flex-nowrap gap-y-6 md:flex-1">
-          <div className="flex items-center justify-between gap-x-4">
-            {/* title */}
-            <h1 className="text-[15px] font-[1000] text-[#1E2A44] sm:text-xl">
-              {post.title}
-            </h1>
-            {/* reading time */}
-            {/* <div className="flex items-center gap-x-1 md:hidden">
-              <span>
-                <svg
-                  width="20"
-                  height="20"
-                  viewBox="0 0 12 12"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M1 6C1 3.64298 1 2.46446 1.73223 1.73223C2.46446 1 3.64298 1 6 1C8.357 1 9.53555 1 10.2677 1.73223C11 2.46446 11 3.64298 11 6C11 8.357 11 9.53555 10.2677 10.2677C9.53555 11 8.357 11 6 11C3.64298 11 2.46446 11 1.73223 10.2677C1 9.53555 1 8.357 1 6Z"
-                    fill="#1E2A44"
-                  />
-                  <path
-                    fillRule="evenodd"
-                    clipRule="evenodd"
-                    d="M6 3.625C6.2071 3.625 6.375 3.79289 6.375 4V5.84465L7.51515 6.98485C7.6616 7.1313 7.6616 7.3687 7.51515 7.51515C7.3687 7.6616 7.1313 7.6616 6.98485 7.51515L5.73485 6.26515C5.6645 6.19485 5.625 6.09945 5.625 6V4C5.625 3.79289 5.7929 3.625 6 3.625Z"
-                    fill="white"
-                  />
-                </svg>
-              </span>
-              <span className="text-xs font-extrabold text-[#3F4C70]">
-                زمان مطالعه: 10 دقیقه
-              </span>
-            </div> */}
-          </div>
-          <div className="h-[2px] w-[50px] self-center bg-[#2251D1]/20"></div>
-          {/* author and date and like and save */}
-          <div className="flex items-center justify-between gap-6">
-            <div className="flex flex-wrap items-center gap-6">
-              <div className="flex items-center gap-x-1">
-                <div className="rounded-full bg-[#C3CDFF]/90 p-1 backdrop-blur-sm">
-                  <svg
-                    width="32"
-                    height="32"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <g clipPath="url(#clip0_57_980)">
-                      <path
-                        d="M12.2148 15.6669C14.3662 15.6669 16.1102 13.9228 16.1102 11.7714C16.1102 9.62003 14.3662 7.87598 12.2148 7.87598C10.0634 7.87598 8.31934 9.62003 8.31934 11.7714C8.31934 13.9228 10.0634 15.6669 12.2148 15.6669Z"
-                        fill="#FFB6B6"
-                      />
-                      <path
-                        d="M9.97847 16.2427L9.80248 14.4638L13.3168 13.8066L15.392 18.8593L11.783 23.0097L9.21155 17.957L9.97847 16.2427Z"
-                        fill="#FFB6B6"
-                      />
-                      <path
-                        d="M9.74604 15.3544L10.5144 15.528C10.5144 15.528 9.91039 13.6127 10.1154 13.4299C10.3204 13.247 10.8228 13.5351 10.8228 13.5351L11.3507 14.127L11.9937 13.4723C11.9937 13.4723 12.6918 12.6042 12.9652 12.3604C13.2385 12.1166 12.7995 11.2117 12.7995 11.2117C12.7995 11.2117 16.8547 10.1182 15.3458 8.15127C15.3458 8.15127 14.4611 6.60911 14.1729 7.11147C13.8848 7.61384 13.5413 6.81598 13.5413 6.81598L12.4922 7.01547C12.4922 7.01547 10.4218 5.7947 8.45676 8.40628C6.49169 11.0179 9.74604 15.3544 9.74604 15.3544Z"
-                        fill="#2F2E41"
-                      />
-                      <path
-                        d="M19.5411 21.3361C17.4122 23.0621 14.7785 24 12 24C9.46285 24 7.04616 23.2178 5.02466 21.7678C5.02827 21.73 5.03188 21.6925 5.03504 21.6551C5.08872 21.0686 5.13654 20.4984 5.16812 20.0256C5.29037 18.19 9.57293 16.9665 9.57293 16.9665C9.57293 16.9665 9.59233 16.9859 9.63113 17.0197C9.86752 17.2272 10.8271 17.9797 12.5098 18.19C14.0102 18.3776 14.5042 17.4875 14.6535 17.0612C14.6986 16.9313 14.7122 16.8442 14.7122 16.8442L19.117 18.9244C19.4044 19.3349 19.5167 20.2191 19.5388 21.213C19.5397 21.254 19.5406 21.2946 19.5411 21.3361Z"
-                        fill="#6C63FF"
-                      />
-                    </g>
-                    <defs>
-                      <clipPath id="clip0_57_980">
-                        <rect width="24" height="24" fill="white" />
-                      </clipPath>
-                    </defs>
-                  </svg>
-                </div>
-                <div className="text-xs font-[1000] text-[#1E2A44]">
-                  {post.author.name}
-                </div>
-                <div className="h-[4px] w-[4px] rounded-full bg-[#1E293B]"></div>
-                {/* date */}
-                <span className="text-xs font-extrabold text-[#3F4C70]">
-                  {toLocalDateShort(post.createdAt)}
-                </span>
-                <div className="h-[11px] w-[2px] rounded-full bg-[#1E293B]"></div>
-                <span className="text-xs font-extrabold text-[#3F4C70]">
-                  {new Date(post.createdAt).toLocaleTimeString()}
-                </span>
-              </div>
-              {/* reading time */}
-              <div className="hidden items-center gap-x-1 md:flex">
-                <span>
-                  <svg
-                    width="20"
-                    height="20"
-                    viewBox="0 0 12 12"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M1 6C1 3.64298 1 2.46446 1.73223 1.73223C2.46446 1 3.64298 1 6 1C8.357 1 9.53555 1 10.2677 1.73223C11 2.46446 11 3.64298 11 6C11 8.357 11 9.53555 10.2677 10.2677C9.53555 11 8.357 11 6 11C3.64298 11 2.46446 11 1.73223 10.2677C1 9.53555 1 8.357 1 6Z"
-                      fill="#1E2A44"
-                    />
-                    <path
-                      fillRule="evenodd"
-                      clipRule="evenodd"
-                      d="M6 3.625C6.2071 3.625 6.375 3.79289 6.375 4V5.84465L7.51515 6.98485C7.6616 7.1313 7.6616 7.3687 7.51515 7.51515C7.3687 7.6616 7.1313 7.6616 6.98485 7.51515L5.73485 6.26515C5.6645 6.19485 5.625 6.09945 5.625 6V4C5.625 3.79289 5.7929 3.625 6 3.625Z"
-                      fill="white"
-                    />
-                  </svg>
-                </span>
-                <span className="text-xs font-extrabold text-[#3F4C70]">
-                  زمان مطالعه: 10 دقیقه
-                </span>
-              </div>
-            </div>
-          </div>
-          <div className="h-[2px] w-[50px] self-center bg-[#2251D1]/20"></div>
-
-          {/* description */}
-          <h2 className="hidden text-sm font-bold text-[#1E2A44] md:block">
-            {post.briefText}
-          </h2>
-        </div>
-        <div className="mb-32 flex flex-col gap-6 md:mb-0 md:flex-row">
-          {/* post paragraph */}
-          <div className="flex flex-col gap-y-2">
-            <h3 className="font-black text-[#1E2A44]">توضیحات</h3>
-            <p className="text-xs font-black text-[#1E2A44]">{post.text}</p>
-          </div>
-          {/* suggestions */}
-          {post.related.length > 0 && (
-            <div className="rounded-[32px] bg-[#3B66FF]/10 p-2 shadow-[0_0_20px_rgba(59,102,255,0.5)]">
-              {post.related.length > 0 && <RelatedPost posts={post.related} />}
-            </div>
-          )}
-        </div>
+      {/* Floating Action Bar (Mobile Only) */}
+      <div className="fixed bottom-6 left-1/2 z-50 flex -translate-x-1/2 items-center gap-6 rounded-full bg-white/80 px-8 py-3 shadow-2xl shadow-blue-900/20 ring-1 ring-slate-200 backdrop-blur-md lg:hidden">
+        <button className="text-slate-400 hover:text-rose-500">
+          <Heart className="h-6 w-6" />
+        </button>
+        <div className="h-4 w-px bg-slate-300"></div>
+        <button className="text-slate-400 hover:text-blue-600">
+          <MessageCircle className="h-6 w-6" />
+        </button>
+        <div className="h-4 w-px bg-slate-300"></div>
+        <button className="text-slate-400 hover:text-slate-800">
+          <Share2 className="h-6 w-6" />
+        </button>
       </div>
     </div>
   );
 }
 
+// کامپوننت دکمه شناور سایدبار (دسکتاپ)
+function FloatingActionBtn({ icon, count, activeColor = "text-blue-600" }) {
+  return (
+    <button className="group relative flex flex-col items-center gap-1">
+      <div
+        className={`flex h-12 w-12 items-center justify-center rounded-2xl bg-white text-slate-400 shadow-lg shadow-slate-200/50 ring-1 ring-slate-100 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:ring-blue-100 group-hover:${activeColor}`}
+      >
+        {React.cloneElement(icon, {
+          className: "w-6 h-6 transition-transform group-hover:scale-110",
+        })}
+      </div>
+      {count !== undefined && (
+        <span className="text-[10px] font-bold text-slate-400">{count}</span>
+      )}
+    </button>
+  );
+}
+
 export default SinglePost;
-{
-  /* post comment */
-}
-{
-  /* <div>
-        <PostComment post={post} />
-      </div> */
-}

@@ -12,6 +12,6 @@ export async function getAllCommentsApi(options = {}) {
 
 export async function removeCommentsApi(commentId) {
   return http
-    .remove(`/comment/remove/${commentId}`)
+    .delete(`/comment/remove/${commentId}`)
     .then(({ data }) => data.data);
 }
