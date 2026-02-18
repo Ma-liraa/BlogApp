@@ -15,7 +15,7 @@ async function Page({ searchParams }) {
   const { search } = searchParams;
 
   return (
-    <main className="container mx-auto max-w-7xl">
+    <main className="md:container md:mx-auto md:max-w-7xl">
       {search && (
         <div className="mb-10 flex items-center gap-3 rounded-3xl bg-blue-50 p-6 ring-1 ring-blue-100">
           <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white text-blue-600 shadow-sm">

@@ -1,7 +1,5 @@
 "use client";
-
 import { getUserApi, signinApi, signupApi } from "@/services/authService";
-// import { useRouter } from "next/navigation";
 
 import { createContext, useReducer, useContext, useEffect } from "react";
 import toast from "react-hot-toast";

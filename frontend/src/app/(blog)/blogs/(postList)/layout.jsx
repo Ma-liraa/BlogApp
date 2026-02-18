@@ -1,12 +1,11 @@
 import React, { Suspense } from "react";
-import Spinner from "@/ui/Spinner";
 import CategoryList from "../_components/CategoryList";
 import { TimeFilter } from "@/ui/TimeFilter";
-import { Search, Mail, TrendingUp } from "lucide-react"; // استفاده از آیکون‌ها
+import { Mail, TrendingUp } from "lucide-react"; // استفاده از آیکون‌ها
 
 async function Layout({ children }) {
   return (
-    <div className="container mx-auto max-w-7xl py-8">
+    <div className="py-8 md:container md:mx-auto md:max-w-7xl">
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-12">
         {/* --- بخش سایدبار --- */}
         <aside className="col-span-1 lg:col-span-3">
@@ -27,7 +26,7 @@ async function Layout({ children }) {
             </div>
 
             {/* ۳. بخش محبوب‌ترین‌ها (نمونه استاتیک) */}
-            <div className="rounded-3xl border border-slate-100 bg-white p-5 shadow-sm">
+            <div className="hidden rounded-3xl border border-slate-100 bg-white p-5 shadow-sm md:block">
               <div className="mb-4 flex items-center gap-2 text-slate-800">
                 <TrendingUp className="h-4 w-4 text-blue-600" />
                 <span className="text-sm font-black">داغ‌ترین مطالب</span>
@@ -47,7 +46,7 @@ async function Layout({ children }) {
             </div>
 
             {/* ۴. بنر خبرنامه (CTA) */}
-            <div className="relative overflow-hidden rounded-[32px] bg-blue-600 p-6 text-white shadow-xl shadow-blue-500/20">
+            <div className="relative hidden overflow-hidden rounded-[32px] bg-blue-600 p-6 text-white shadow-xl shadow-blue-500/20 md:block">
               {/* دایره‌های تزئینی پس‌زمینه */}
               <div className="absolute -right-4 -top-4 h-16 w-16 rounded-full bg-white/10"></div>
               <div className="absolute -bottom-2 -left-2 h-10 w-10 rounded-full bg-white/10"></div>

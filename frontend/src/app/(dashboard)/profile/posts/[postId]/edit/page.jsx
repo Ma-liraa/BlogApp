@@ -22,7 +22,7 @@ async function EditPage({ params: { postId } }) {
           },
         ]}
       />
-      <div className="mx-auto flex max-w-screen-sm justify-center">
+      <div className="flex justify-center">
         <CreatePostForm postToEdit={post} />
       </div>
     </div>

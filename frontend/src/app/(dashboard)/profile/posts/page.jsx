@@ -13,10 +13,14 @@ async function page({ searchParams }) {
 
   return (
     <div>
-      <div className="mb-8 grid grid-cols-1 items-center gap-8 text-[#1E2A44] lg:grid-cols-3">
-        <h1 className="text-xl font-[1000]">لیست پست‌ها</h1>
-        <Search />
-        <CreatePost />
+      <div className="mb-8 grid grid-cols-2 items-center gap-4 text-[#1E2A44] lg:grid-cols-3">
+        <h1 className="order-1 text-xl font-[1000]">لیست پست‌ها</h1>
+        <div className="order-3 md:order-2 col-span-2 md:col-span-1">
+          <Search />
+        </div>
+        <div className="order-2 md:order-3">
+          <CreatePost />
+        </div>
       </div>
       <Suspense fallback={<Spinner />} key={query}>
         <PostsTable query={query} />

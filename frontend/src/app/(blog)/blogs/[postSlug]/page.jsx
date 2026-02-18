@@ -187,7 +187,7 @@ async function SinglePost({ params }) {
             )}
 
             {/* --- سایدبار (Sticky Sidebar) --- */}
-            <div className="lg:col-span-4">
+            <div className="lg:col-span-4 mb-48 md:mb-0">
               <div className="sticky top-24 flex flex-col gap-8">
                 {/* 1. کارت نویسنده (طراحی جدید) */}
                 <div className="group relative overflow-hidden rounded-[32px] bg-slate-900 p-6 text-white shadow-2xl shadow-blue-900/20 transition-all hover:shadow-blue-900/30">
@@ -320,7 +320,7 @@ async function SinglePost({ params }) {
         </div>
       </div>
       {/* Floating Action Bar (Mobile Only) */}
-      <div className="fixed bottom-6 left-1/2 z-50 flex -translate-x-1/2 items-center gap-6 rounded-full bg-white/80 px-8 py-3 shadow-2xl shadow-blue-900/20 ring-1 ring-slate-200 backdrop-blur-md lg:hidden">
+      <div className="fixed bottom-28 left-1/2 z-50 flex -translate-x-1/2 items-center gap-6 rounded-full bg-white/80 px-8 py-3 shadow-2xl shadow-blue-900/20 ring-1 ring-slate-200 backdrop-blur-md lg:hidden">
         <button className="text-slate-400 hover:text-rose-500">
           <Heart className="h-6 w-6" />
         </button>

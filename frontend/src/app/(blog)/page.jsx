@@ -477,7 +477,9 @@ async function page({ searchParams }) {
         <div className="h-1 flex-1 rounded-full bg-[#2251D1]/20"></div>
       </section>
       {/* Filter Desctop */}
-      <SortFilter />
+      <section className="mt-14 hidden md:block">
+        <SortFilter />
+      </section>
       {/* Blogs */}
       <section className="mt-10 grid grid-cols-1 gap-4 pb-8 md:grid-cols-3">
         {posts?.map((blog) => (
@@ -503,7 +505,15 @@ async function page({ searchParams }) {
                 <div className="flex items-center justify-between gap-x-2">
                   <div className="flex items-center gap-x-2">
                     {blog.category?.title && (
-                      <div className="rounded-[15px] bg-[#003366] p-2 px-3 text-sm font-black text-[#00BFFF]">
+                      <div
+                        style={{
+                          backgroundColor:
+                            categoryItems[blog.category.slug]?.primaryColor,
+                          color:
+                            categoryItems[blog.category.slug]?.secondaryColor,
+                        }}
+                        className="rounded-[15px] p-2 px-3 text-sm font-black"
+                      >
                         {blog.category?.title}
                       </div>
                     )}
@@ -511,20 +521,6 @@ async function page({ searchParams }) {
                       {toLocalDateShort(blog.createdAt)}
                     </div>
                   </div>
-                  <button className="rounded-full bg-white p-4 opacity-70 transition-all duration-300 lg:hover:scale-105 lg:active:scale-95">
-                    <svg
-                      width="20"
-                      height="20"
-                      viewBox="0 0 20 20"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M7.46807 15.7591L7.93238 15.1701L7.46807 15.7591ZM9.99996 4.58386L9.45959 5.10396C9.60098 5.25086 9.79607 5.33386 9.99996 5.33386C10.2038 5.33386 10.3989 5.25086 10.5403 5.10396L9.99996 4.58386ZM12.5318 15.7591L12.9962 16.3481L12.5318 15.7591ZM5.91323 13.5876C5.59341 13.3244 5.12076 13.3702 4.85754 13.6901C4.59432 14.0099 4.64021 14.4825 4.96003 14.7458L5.43663 14.1667L5.91323 13.5876ZM1.84194 11.2362C2.0407 11.5996 2.49643 11.7331 2.85984 11.5343C3.22326 11.3356 3.35673 10.8799 3.15797 10.5164L2.49996 10.8763L1.84194 11.2362ZM1.66663 7.61425H2.41663C2.41663 5.86863 3.40282 4.41123 4.73889 3.80051C6.02768 3.2114 7.77661 3.3554 9.45959 5.10396L9.99996 4.58386L10.5403 4.06376C8.47344 1.91635 6.0557 1.54931 4.1153 2.43628C2.22216 3.30164 0.916626 5.30743 0.916626 7.61425H1.66663ZM7.46807 15.7591L7.00375 16.3481C7.42947 16.6837 7.89443 17.048 8.36758 17.3245C8.84048 17.6009 9.39289 17.8333 9.99996 17.8333V17.0833V16.3333C9.77369 16.3333 9.49277 16.2447 9.12437 16.0294C8.75621 15.8143 8.37189 15.5165 7.93238 15.1701L7.46807 15.7591ZM12.5318 15.7591L12.9962 16.3481C14.1776 15.4167 15.7111 14.3327 16.9128 12.9795C18.1403 11.5974 19.0833 9.87454 19.0833 7.61425H18.3333H17.5833C17.5833 9.4064 16.8515 10.7895 15.7913 11.9835C14.7052 13.2064 13.338 14.1685 12.0675 15.1701L12.5318 15.7591ZM18.3333 7.61425H19.0833C19.0833 5.30743 17.7778 3.30164 15.8846 2.43628C13.9442 1.54931 11.5265 1.91635 9.45959 4.06376L9.99996 4.58386L10.5403 5.10396C12.2233 3.3554 13.9722 3.2114 15.261 3.80051C16.5971 4.41123 17.5833 5.86863 17.5833 7.61425H18.3333ZM12.5318 15.7591L12.0675 15.1701C11.628 15.5165 11.2437 15.8143 10.8755 16.0294C10.5071 16.2447 10.2262 16.3333 9.99996 16.3333V17.0833V17.8333C10.607 17.8333 11.1594 17.6009 11.6323 17.3245C12.1055 17.048 12.5704 16.6837 12.9962 16.3481L12.5318 15.7591ZM7.46807 15.7591L7.93238 15.1701C7.26469 14.6437 6.59634 14.1498 5.91323 13.5876L5.43663 14.1667L4.96003 14.7458C5.65272 15.3159 6.38927 15.8636 7.00375 16.3481L7.46807 15.7591ZM2.49996 10.8763L3.15797 10.5164C2.69953 9.67823 2.41663 8.73011 2.41663 7.61425H1.66663H0.916626C0.916626 9.00148 1.27268 10.1954 1.84194 11.2362L2.49996 10.8763Z"
-                        fill="#1F2937"
-                      />
-                    </svg>
-                  </button>
                 </div>
               </div>
             </div>
@@ -539,19 +535,7 @@ async function page({ searchParams }) {
       )}
       {/* Filter */}
       <section className="fixed bottom-28 left-0 right-0 z-20 block md:hidden">
-        <div className="flex items-center justify-center">
-          <div className="flex w-fit items-center gap-x-2 rounded-full bg-white p-2">
-            <button className="rounded-[15px] bg-[#FFF3D0] p-3 text-sm font-extrabold text-[#EEBB30] transition-all active:scale-95 lg:hover:scale-105">
-              بیشترین لایک
-            </button>
-            <button className="rounded-[15px] bg-[#E5F6FF] p-3 text-sm font-extrabold text-[#3072EE] transition-all active:scale-95 lg:hover:scale-105">
-              قدیمی ترین
-            </button>
-            <button className="rounded-[15px] bg-[#F8F5FF] p-3 text-sm font-extrabold text-[#6054A2] transition-all active:scale-95 lg:hover:scale-105">
-              جدیدترین
-            </button>
-          </div>
-        </div>
+        <SortFilter />
       </section>
     </div>
   );

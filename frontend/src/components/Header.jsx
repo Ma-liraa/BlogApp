@@ -29,13 +29,16 @@ function Header() {
         <nav className="flex items-center justify-between gap-x-6">
           {/* بخش سمت راست: لوگو */}
           <div className="flex items-center">
-            <Link href="/" className="group flex items-center gap-x-3">
-              <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-blue-600 text-white shadow-lg shadow-blue-200 transition-transform group-hover:rotate-12">
-                <Hexagon className="h-6 w-6 fill-blue-400/30" />
+            {/* لوگو */}
+            <Link href="/">
+              <div className="flex items-center justify-center gap-x-3 py-2">
+                <div className="flex h-14 w-14 items-center justify-center rounded-[20px] bg-blue-50 text-blue-600">
+                  <Hexagon className="h-8 w-8 stroke-[2.5]" />
+                </div>
+                <span className="text-xl font-black tracking-tight text-slate-800">
+                  وبلاگینو
+                </span>
               </div>
-              <h2 className="text-2xl font-black tracking-tight text-slate-800 transition-colors group-hover:text-blue-600">
-                وبلاگینو
-              </h2>
             </Link>
           </div>
 
