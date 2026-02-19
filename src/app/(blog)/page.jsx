@@ -528,7 +528,7 @@ async function page({ searchParams }) {
         ))}
       </section>
       {/* Pagination */}
-      {totalPages < 9 && (
+      {totalPages > 1 && (
         <section className="flex justify-center pb-48 md:pb-8">
           <Pagination totalPages={totalPages} />
         </section>

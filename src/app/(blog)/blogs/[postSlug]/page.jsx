@@ -16,6 +16,7 @@ import {
   ChevronLeft,
 } from "lucide-react";
 import Link from "next/link";
+import { ButtonsDesctop, ButtonsMobile } from "./Button";
 
 export async function generateMetadata({ params }) {
   const post = await getPostBySlug(params.postSlug);
@@ -28,11 +29,6 @@ async function SinglePost({ params }) {
 
   return (
     <div className="container mx-auto max-w-[1440px] px-4 py-8 lg:px-8">
-      {/* =========================================================================
-          HERO SECTION (SPLIT LAYOUT)
-          دسکتاپ: متن راست | عکس چپ
-          موبایل: عکس بالا | متن پایین
-      ========================================================================= */}
       <header className="mb-16 grid grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-16">
         {/* --- ستون محتوای متنی (عنوان و ...) --- */}
         <div className="order-2 flex flex-col gap-y-6 lg:order-1 lg:col-span-7">
@@ -106,28 +102,11 @@ async function SinglePost({ params }) {
         </div>
       </header>
 
-      {/* =========================================================================
-          MAIN CONTENT AREA (GRID)
-      ========================================================================= */}
       <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
         {/* --- سایدبار ابزارک‌ها (Sticky Sidebar Left) --- */}
         <div className="hidden lg:col-span-1 lg:block">
           <div className="sticky top-32 flex flex-col items-center gap-6">
-            <FloatingActionBtn
-              icon={<Heart />}
-              count={post.likesCount || 120}
-              activeColor="text-rose-500"
-            />
-            <FloatingActionBtn
-              icon={<Bookmark />}
-              activeColor="text-blue-600"
-            />
-            <FloatingActionBtn icon={<Share2 />} />
-            <div className="h-px w-8 bg-slate-200"></div>
-            <FloatingActionBtn
-              icon={<MessageCircle />}
-              count={post.commentsCount || 4}
-            />
+            <ButtonsDesctop post={post} />
           </div>
         </div>
 
@@ -187,7 +166,7 @@ async function SinglePost({ params }) {
             )}
 
             {/* --- سایدبار (Sticky Sidebar) --- */}
-            <div className="lg:col-span-4 mb-48 md:mb-0">
+            <div className="mb-48 md:mb-0 lg:col-span-4">
               <div className="sticky top-24 flex flex-col gap-8">
                 {/* 1. کارت نویسنده (طراحی جدید) */}
                 <div className="group relative overflow-hidden rounded-[32px] bg-slate-900 p-6 text-white shadow-2xl shadow-blue-900/20 transition-all hover:shadow-blue-900/30">
@@ -321,38 +300,11 @@ async function SinglePost({ params }) {
       </div>
       {/* Floating Action Bar (Mobile Only) */}
       <div className="fixed bottom-28 left-1/2 z-50 flex -translate-x-1/2 items-center gap-6 rounded-full bg-white/80 px-8 py-3 shadow-2xl shadow-blue-900/20 ring-1 ring-slate-200 backdrop-blur-md lg:hidden">
-        <button className="text-slate-400 hover:text-rose-500">
-          <Heart className="h-6 w-6" />
-        </button>
-        <div className="h-4 w-px bg-slate-300"></div>
-        <button className="text-slate-400 hover:text-blue-600">
-          <MessageCircle className="h-6 w-6" />
-        </button>
-        <div className="h-4 w-px bg-slate-300"></div>
-        <button className="text-slate-400 hover:text-slate-800">
-          <Share2 className="h-6 w-6" />
-        </button>
+        <ButtonsMobile post={post} />
       </div>
     </div>
   );
 }
 
-// کامپوننت دکمه شناور سایدبار (دسکتاپ)
-function FloatingActionBtn({ icon, count, activeColor = "text-blue-600" }) {
-  return (
-    <button className="group relative flex flex-col items-center gap-1">
-      <div
-        className={`flex h-12 w-12 items-center justify-center rounded-2xl bg-white text-slate-400 shadow-lg shadow-slate-200/50 ring-1 ring-slate-100 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:ring-blue-100 group-hover:${activeColor}`}
-      >
-        {React.cloneElement(icon, {
-          className: "w-6 h-6 transition-transform group-hover:scale-110",
-        })}
-      </div>
-      {count !== undefined && (
-        <span className="text-[10px] font-bold text-slate-400">{count}</span>
-      )}
-    </button>
-  );
-}
 
 export default SinglePost;

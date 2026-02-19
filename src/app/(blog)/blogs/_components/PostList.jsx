@@ -118,7 +118,7 @@ function PostList({ posts }) {
                 <button
                   disabled={isLiking}
                   onClick={() => likePost(post._id)}
-                  className={`flex items-center gap-1 rounded-xl bg-rose-50 px-3 py-2 text-rose-600 transition-colors hover:bg-rose-100`}
+                  className={`flex items-center gap-1 rounded-xl bg-rose-50 px-3 py-2 text-rose-600 ${post.isLiked ? "fill-rose-600" : ""} transition-colors hover:bg-rose-100`}
                 >
                   <Heart className={`h-4 w-4`} />
                   <span className="text-xs font-black">{post.likesCount}</span>

@@ -56,13 +56,13 @@ function UserRow({ user, index }) {
                 cy="4.99999"
                 r="3.33333"
                 stroke="#1F2937"
-                stroke-width="1.5"
+                strokeWidth="1.5"
               />
               <path
                 d="M12.5 17.1792C11.7422 17.3849 10.8946 17.5 9.99996 17.5C6.7783 17.5 4.16663 16.0076 4.16663 14.1667C4.16663 12.3257 6.7783 10.8333 9.99996 10.8333C13.2216 10.8333 15.8333 12.3257 15.8333 14.1667C15.8333 14.4544 15.7695 14.7337 15.6495 15"
                 stroke="#1F2937"
-                stroke-width="1.5"
-                stroke-linecap="round"
+                strokeWidth="1.5"
+                strokeLinecap="round"
               />
             </svg>
           </div>

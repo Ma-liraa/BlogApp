@@ -41,7 +41,7 @@ async function Page({ searchParams }) {
         <PostList posts={posts} />
 
         {/* Pagination */}
-        {totalPages < 9 && (
+        {totalPages > 1 && (
           <section className="mt-8 flex items-center justify-center pb-48 md:pb-8">
             <Pagination totalPages={totalPages} />
           </section>
